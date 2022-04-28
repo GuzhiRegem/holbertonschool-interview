@@ -8,8 +8,6 @@ listint_t *insert_node(listint_t **head, int number)
 	listint_t *prev = NULL, *p, *new;
 	if (!head)
 		return (NULL);
-	if (!*head)
-		return (NULL);
 	p = *head;
 	while (p)
 	{
