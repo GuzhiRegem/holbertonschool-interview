@@ -5,19 +5,17 @@
 
 
 def canUnlockAll(boxes):
-    visited = [0]
+    visited = []
     stack = [0]
-    while(stack != []):
-        idx = stack[-1]
-        found = -1
-        for key in boxes[idx]:
-            if key in visited:
-                continue
-            found = key
-            break
-        if found == -1:
+    while stack != []:
+        if not stack[-1] in visited:
+            visited.append(stack[-1])
+        found = False
+        for key in boxes[stack[-1]]:
+            if not key in visited:
+                stack.append(key)
+                found = True
+                break
+        if not found:
             stack.pop()
-        else:
-            stack.append(found)
-            visited.append(found)
-        return len(visited) == len(boxes)
+    return (len(visited) == len(boxes))
