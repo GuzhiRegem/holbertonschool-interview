@@ -14,16 +14,12 @@ listint_t *insert_node(listint_t **head, int number)
 	pr = *head;
 	if (pr)
 	{
+		nx = pr;
 		if (pr->n > n)
-		{
-			nx = pr;
 			pr = NULL;
-		}
 		else
-		{
 			for (nx = pr->next; nx && nx->n <= n; pr = nx, nx = pr->next)
 				;
-		}
 	}
 	new = malloc(sizeof(listint_t *));
 	if (!new)
