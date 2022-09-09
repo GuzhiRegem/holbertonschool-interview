@@ -1,5 +1,6 @@
 #include "lists.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
  * new_node - creates node
@@ -39,7 +40,6 @@ int is_palindrome(listint_t **head)
 		if (p->n != r->n && i < mid)
 		{
 			out = 0;
-			break;
 		}
 		p = p->next;
 		r = r->next;
