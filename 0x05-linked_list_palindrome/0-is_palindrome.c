@@ -1,25 +1,20 @@
 #include "lists.h"
+#include <stdlib.h>
 
 /**
- * pal - recursirve linked list palindrome
- * @list: list to check
- * @len: length of list
- * Return: 1 if true, 0 if false
+ * new_node - creates node
+ * @n: num
+ * @next: next
+ * Return: return
  */
-int pal(listint_t *list, int len)
+listint_t *new_node(int n, listint_t *next)
 {
-	listint_t *end = list;
-	int i;
+	listint_t *new;
 
-	if (len <= 1)
-		return (len);
-	for (i = 0; i < (len - 1); i++)
-		end = end->next;
-	if (list->n != end->n)
-		return (0);
-	if (len == 2)
-		return (1);
-	return (pal(list->next, len - 2));
+	new = malloc(sizeof(listint_t));
+	new->n = n;
+	new->next = next;
+	return (new);
 }
 
 /**
@@ -29,13 +24,27 @@ int pal(listint_t *list, int len)
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *p;
-	int i;
+	listint_t *p, *rev = NULL, *r;
+	int i, mid, out = 1;
 
 	p = *head;
 	if (!p)
 		return (1);
-	for (i = 1; p->next; i++)
+	for (i = 1; p->next; i++, p = p->next)
+		rev = new_node(p->n, rev);
+	mid = (i / 2) + (i % 2);
+	p = *head, r = rev;
+	for (i = 0; i < mid; i++)
+	{
+		if (p->n != r->n)
+			out = 1;
 		p = p->next;
-	return (pal(*head, i));
+		r = r->next;
+	}
+	for (; rev; rev = r)
+	{
+		r = rev->next;
+		free(rev);
+	}
+	return (out);
 }
