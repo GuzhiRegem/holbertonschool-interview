@@ -34,19 +34,15 @@ int is_palindrome(listint_t **head)
 		rev = new_node(p->n, rev);
 	mid = (i / 2) + (i % 2);
 	p = *head, r = rev;
-	for (i = 0; i < mid; i++)
+	for (i = 0; r; i++, rev = r)
 	{
-		if (p->n != r->n)
+		if (p->n != r->n && i < mid)
 		{
 			out = 0;
 			break;
 		}
 		p = p->next;
 		r = r->next;
-	}
-	for (; rev; rev = r)
-	{
-		r = rev->next;
 		free(rev);
 	}
 	return (out);
