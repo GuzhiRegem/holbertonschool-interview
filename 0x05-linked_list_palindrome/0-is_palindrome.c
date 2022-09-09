@@ -37,7 +37,10 @@ int is_palindrome(listint_t **head)
 	for (i = 0; i < mid; i++)
 	{
 		if (p->n != r->n)
+		{
 			out = 0;
+			break;
+		}
 		p = p->next;
 		r = r->next;
 	}
