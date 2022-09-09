@@ -30,14 +30,14 @@ int is_palindrome(listint_t **head)
 	p = *head;
 	if (!p)
 		return (1);
-	for (i = 1; p->next; i++, p = p->next)
+	for (i = 0; p; i++, p = p->next)
 		rev = new_node(p->n, rev);
 	mid = (i / 2) + (i % 2);
 	p = *head, r = rev;
 	for (i = 0; i < mid; i++)
 	{
 		if (p->n != r->n)
-			out = 1;
+			out = 0;
 		p = p->next;
 		r = r->next;
 	}
