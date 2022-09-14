@@ -2,13 +2,13 @@
 """
     module
 """
-import fileinput
+import sys
 
 
 def print_dir(d):
     for key, value in d.items():
         if value != 0:
-            print(f"{key}: {value}")
+            print("{}: {}".format(key, value))
 
 
 if __name__ == "__main__":
@@ -25,7 +25,7 @@ if __name__ == "__main__":
         405: 0,
         500: 0
         }
-    for line in fileinput.input():
+    for line in sys.stdin:
         args = line.split(" ")
         if not int(args[-2]) in list(stats.keys()):
             continue
@@ -33,6 +33,6 @@ if __name__ == "__main__":
         stats[int(args[-2])] += 1
         if len(lis) == 10:
             total += sum(lis)
-            print(f"File size: {total}")
+            print("File size: {}".format(total))
             print_dir(stats)
             lis = []
