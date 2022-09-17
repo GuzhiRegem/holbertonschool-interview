@@ -25,13 +25,12 @@ if __name__ == "__main__":
         500: 0
         }
     try:
-        if len(sys.stdin.read()) == 0:
-            print("File size: 0") 
+        empty_file = True
         while(1):
             lis = []
             empty = True
             for line in sys.stdin:
-                empty = False
+                empty, empty_file = False, False
                 args = line.split(" ")
                 if not int(args[-2]) in list(stats.keys()):
                     continue
@@ -44,6 +43,8 @@ if __name__ == "__main__":
             total += sum(lis)
             print("File size: {}".format(total))
             print_dir(stats)
+        if empty_file:
+            print("File size: 0")
     except KeyboardInterrupt as e:
         print("File size: {}".format(total))
         print_dir(stats)
