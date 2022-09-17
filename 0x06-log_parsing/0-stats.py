@@ -3,6 +3,7 @@
     module
 """
 import sys
+import signal
 
 
 def print_dir(d):
@@ -12,8 +13,6 @@ def print_dir(d):
 
 
 if __name__ == "__main__":
-
-    lis = []
     total = 0
     stats = {
         200: 0,
@@ -25,14 +24,27 @@ if __name__ == "__main__":
         405: 0,
         500: 0
         }
-    for line in sys.stdin:
-        args = line.split(" ")
-        if not int(args[-2]) in list(stats.keys()):
-            continue
-        lis.append(int(args[-1]))
-        stats[int(args[-2])] += 1
-        if len(lis) == 10:
+    try:
+        if len(sys.stdin.read()) == 0:
+            print("File size: 0") 
+        while(1):
+            lis = []
+            empty = True
+            for line in sys.stdin:
+                empty = False
+                args = line.split(" ")
+                if not int(args[-2]) in list(stats.keys()):
+                    continue
+                lis.append(int(args[-1]))
+                stats[int(args[-2])] += 1
+                if len(lis) == 10:
+                    break
+            if empty:
+                break
             total += sum(lis)
             print("File size: {}".format(total))
             print_dir(stats)
-            lis = []
+    except KeyboardInterrupt as e:
+        print("File size: {}".format(total))
+        print_dir(stats)
+        raise e
