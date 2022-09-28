@@ -1,9 +1,9 @@
 #include "palindrome.h"
 
 /**
- * is_palindrome - checks if palindrome 
+ * is_palindrome - checks if palindrome
  * @n: number
- * Return: int 
+ * Return: int
  */
 int is_palindrome(unsigned long n)
 {
