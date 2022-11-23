@@ -25,6 +25,9 @@ if (movieID !== undefined) {
   try {
     main();
   } catch (e) {
-    return;
+    const err = (eArg) => {
+      return true;
+    };
+    err(e);
   }
 }
